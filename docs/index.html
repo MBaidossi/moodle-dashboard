@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Assignment Dashboard</title>
+<style>
+  :root {
+    --bg: #f7f8fa; --card: #ffffff; --border: #e5e7eb;
+    --text: #1f2430; --muted: #6b7280;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#14161a; --card:#1d2026; --border:#2a2e37; --text:#e8eaee; --muted:#9aa0ab; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 32px 16px; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .subtitle { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
+  .summary { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; }
+  .stat {
+    flex: 1; min-width: 110px; background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 14px;
+  }
+  .stat .n { font-size: 22px; font-weight: 700; }
+  .stat .l { font-size: 12px; color: var(--muted); }
+  h2 { font-size: 15px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em;
+       margin: 28px 0 10px; }
+  .item {
+    display: flex; align-items: stretch; background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 8px; overflow: hidden;
+  }
+  .item-bar { width: 4px; flex-shrink: 0; }
+  .item-body { padding: 12px 14px; flex: 1; min-width: 0; }
+  .item-title { font-weight: 600; font-size: 14px; }
+  .item-course { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .item-meta { padding: 12px 14px; text-align: right; display: flex; flex-direction: column;
+                justify-content: center; gap: 4px; white-space: nowrap; }
+  .badge { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; }
+  .due-date { font-size: 12px; color: var(--muted); }
+  .item-id { font-size: 10px; color: var(--muted); font-family: ui-monospace, Menlo, Consolas, monospace; }
+  .empty { color: var(--muted); font-size: 13px; }
+  details summary { cursor: pointer; color: var(--muted); font-size: 13px; margin-top: 8px; }
+  .note {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 14px; font-size: 12px; color: var(--muted); margin: 6px 0 20px;
+  }
+  footer { margin-top: 32px; font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Assignment Dashboard</h1>
+  <div class="subtitle">Generated Sat, 15 Aug 2026 23:12</div>
+
+  <div class="summary">
+    <div class="stat"><div class="n" style="color:#ea580c">0</div><div class="l">Due &lt; 48h</div></div>
+    <div class="stat"><div class="n" style="color:#ca8a04">0</div><div class="l">This week</div></div>
+    <div class="stat"><div class="n" style="color:#2563a0">2</div><div class="l">Later</div></div>
+    <div class="stat"><div class="n" style="color:#6b7280">2</div><div class="l">Past deadline</div></div>
+  </div>
+
+  <div class="note">
+    This only reflects <strong>due dates</strong> from your Moodle calendar feed &mdash;
+    it has no way to know whether you already submitted something. A "Past deadline"
+    item may well be done already; check Moodle directly if you're not sure.
+    To mark something done yourself, run
+    <code>python3 moodle_dashboard.py --done &lt;id or title&gt;</code> using the
+    <code>#id</code> shown on each item below.
+  </div>
+
+  <h2>Upcoming</h2>
+  
+        <div class="item" data-bucket="later">
+          <div class="item-bar" style="background:#2563a0"></div>
+          <div class="item-body">
+            <div class="item-title" style="">תרגיל בית 2</div>
+            <div class="item-course">מבוא להסתברות - תרגיל קב&#x27; 2 - שכטר</div>
+          </div>
+          <div class="item-meta">
+            <span class="badge" style="background:#2563a022;color:#2563a0">Upcoming</span>
+            <span class="due-date">Tue, 25 Aug 2026 • 23:59</span>
+            <span class="item-id">#190451</span>
+          </div>
+        </div>
+
+        <div class="item" data-bucket="later">
+          <div class="item-bar" style="background:#2563a0"></div>
+          <div class="item-body">
+            <div class="item-title" style="">תרגיל בית 2</div>
+            <div class="item-course">מבוא לרשתות מחשבים - תרגיל קב&#x27; 2 - שכטר</div>
+          </div>
+          <div class="item-meta">
+            <span class="badge" style="background:#2563a022;color:#2563a0">Upcoming</span>
+            <span class="due-date">Mon, 31 Aug 2026 • 23:59</span>
+            <span class="item-id">#190435</span>
+          </div>
+        </div>
+
+  <details>
+    <summary>Past deadlines (2) &mdash; already passed, submission status unknown</summary>
+    
+        <div class="item" data-bucket="overdue">
+          <div class="item-bar" style="background:#6b7280"></div>
+          <div class="item-body">
+            <div class="item-title" style="">תרגיל בית 1</div>
+            <div class="item-course">מבוא להסתברות - תרגיל קב&#x27; 2 - שכטר</div>
+          </div>
+          <div class="item-meta">
+            <span class="badge" style="background:#6b728022;color:#6b7280">Past deadline</span>
+            <span class="due-date">Mon, 10 Aug 2026 • 23:59</span>
+            <span class="item-id">#189659</span>
+          </div>
+        </div>
+
+        <div class="item" data-bucket="overdue">
+          <div class="item-bar" style="background:#6b7280"></div>
+          <div class="item-body">
+            <div class="item-title" style="">תרגיל בית 1</div>
+            <div class="item-course">מבוא לרשתות מחשבים - תרגיל קב&#x27; 2 - שכטר</div>
+          </div>
+          <div class="item-meta">
+            <span class="badge" style="background:#6b728022;color:#6b7280">Past deadline</span>
+            <span class="due-date">Thu, 13 Aug 2026 • 23:59</span>
+            <span class="item-id">#189995</span>
+          </div>
+        </div>
+  </details>
+
+  <details>
+    <summary>Completed (0)</summary>
+    <p class="empty">Nothing marked done yet.</p>
+  </details>
+
+  <details>
+    <summary>Other course events (5) &mdash; class sessions, attendance, etc.</summary>
+    
+        <div class="item" data-bucket="overdue">
+          <div class="item-bar" style="background:#6b7280"></div>
+          <div class="item-body">
+            <div class="item-title" style="">נוכחות תלמידים</div>
+            <div class="item-course">מבוא לרשתות מחשבים - תרגיל קב&#x27; 2 - שכטר</div>
+          </div>
+          <div class="item-meta">
+            <span class="badge" style="background:#6b728022;color:#6b7280">Past deadline</span>
+            <span class="due-date">Thu, 13 Aug 2026 • 13:30</span>
+            <span class="item-id">#190386</span>
+          </div>
+        </div>
+
+        <div class="item" data-bucket="overdue">
+          <div class="item-bar" style="background:#6b7280"></div>
+          <div class="item-body">
+            <div class="item-title" style="">שיעור נצילות 2</div>
+            <div class="item-course">מבוא לרשתות מחשבים - תרגיל קב&#x27; 2 - שכטר</div>
+          </div>
+          <div class="item-meta">
+            <span class="badge" style="background:#6b728022;color:#6b7280">Past deadline</span>
+            <span class="due-date">Thu, 13 Aug 2026 • 13:30</span>
+            <span class="item-id">#190434</span>
+          </div>
+        </div>
+
+        <div class="item" data-bucket="overdue">
+          <div class="item-bar" style="background:#6b7280"></div>
+          <div class="item-body">
+            <div class="item-title" style="">נוכחות תלמידים</div>
+            <div class="item-course">מבוא לרשתות מחשבים - שרון</div>
+          </div>
+          <div class="item-meta">
+            <span class="badge" style="background:#6b728022;color:#6b7280">Past deadline</span>
+            <span class="due-date">Thu, 13 Aug 2026 • 16:15</span>
+            <span class="item-id">#190387</span>
+          </div>
+        </div>
+
+        <div class="item" data-bucket="week">
+          <div class="item-bar" style="background:#ca8a04"></div>
+          <div class="item-body">
+            <div class="item-title" style="">נוכחות תלמידים</div>
+            <div class="item-course">מבוא לרשתות מחשבים - שרון</div>
+          </div>
+          <div class="item-meta">
+            <span class="badge" style="background:#ca8a0422;color:#ca8a04">Due this week</span>
+            <span class="due-date">Thu, 20 Aug 2026 • 19:15</span>
+            <span class="item-id">#190638</span>
+          </div>
+        </div>
+
+        <div class="item" data-bucket="week">
+          <div class="item-bar" style="background:#ca8a04"></div>
+          <div class="item-body">
+            <div class="item-title" style="">נוכחות תלמידים</div>
+            <div class="item-course">מבוא לרשתות מחשבים - תרגיל קב&#x27; 2 - שכטר</div>
+          </div>
+          <div class="item-meta">
+            <span class="badge" style="background:#ca8a0422;color:#ca8a04">Due this week</span>
+            <span class="due-date">Thu, 20 Aug 2026 • 19:30</span>
+            <span class="item-id">#190635</span>
+          </div>
+        </div>
+  </details>
+
+  <footer>Re-run moodle_dashboard.py to refresh assignment due dates from Moodle.</footer>
+</div>
+</body>
+</html>
