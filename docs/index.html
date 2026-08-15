@@ -31,17 +31,18 @@
        margin: 28px 0 10px; }
   .item {
     display: flex; align-items: stretch; background: var(--card); border: 1px solid var(--border);
-    border-radius: 10px; margin-bottom: 8px; overflow: hidden;
+    border-radius: 10px; margin-bottom: 8px; overflow: hidden; transition: opacity .15s;
   }
   .item-bar { width: 4px; flex-shrink: 0; }
+  .item-check { display: flex; align-items: center; padding: 0 4px 0 14px; cursor: pointer; }
+  .item-check input { width: 18px; height: 18px; cursor: pointer; accent-color: #16a34a; }
   .item-body { padding: 12px 14px; flex: 1; min-width: 0; }
-  .item-title { font-weight: 600; font-size: 14px; }
+  .item-title { font-weight: 600; font-size: 14px; transition: color .15s; }
   .item-course { font-size: 12px; color: var(--muted); margin-top: 2px; }
   .item-meta { padding: 12px 14px; text-align: right; display: flex; flex-direction: column;
                 justify-content: center; gap: 4px; white-space: nowrap; }
   .badge { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; }
   .due-date { font-size: 12px; color: var(--muted); }
-  .item-id { font-size: 10px; color: var(--muted); font-family: ui-monospace, Menlo, Consolas, monospace; }
   .empty { color: var(--muted); font-size: 13px; }
   details summary { cursor: pointer; color: var(--muted); font-size: 13px; margin-top: 8px; }
   .note {
@@ -49,149 +50,267 @@
     padding: 10px 14px; font-size: 12px; color: var(--muted); margin: 6px 0 20px;
   }
   footer { margin-top: 32px; font-size: 12px; color: var(--muted); text-align: center; }
+
+  /* Items sitting in the Completed section */
+  #completed-list .item-title { text-decoration: line-through; color: var(--muted); }
+  #completed-list .item { opacity: 0.7; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <h1>Assignment Dashboard</h1>
-  <div class="subtitle">Generated Sun, 16 Aug 2026 01:17</div>
+  <div class="subtitle">Generated Sun, 16 Aug 2026 01:45</div>
 
   <div class="summary">
-    <div class="stat"><div class="n" style="color:#ea580c">0</div><div class="l">Due &lt; 48h</div></div>
-    <div class="stat"><div class="n" style="color:#ca8a04">0</div><div class="l">This week</div></div>
-    <div class="stat"><div class="n" style="color:#2563a0">2</div><div class="l">Later</div></div>
-    <div class="stat"><div class="n" style="color:#6b7280">1</div><div class="l">Past deadline</div></div>
+    <div class="stat"><div class="n" data-stat="soon" style="color:#ea580c">0</div><div class="l">Due &lt; 48h</div></div>
+    <div class="stat"><div class="n" data-stat="week" style="color:#ca8a04">0</div><div class="l">This week</div></div>
+    <div class="stat"><div class="n" data-stat="later" style="color:#2563a0">2</div><div class="l">Later</div></div>
+    <div class="stat"><div class="n" data-stat="overdue" style="color:#6b7280">1</div><div class="l">Past deadline</div></div>
   </div>
 
   <div class="note">
     This only reflects <strong>due dates</strong> from your Moodle calendar feed &mdash;
     it has no way to know whether you already submitted something. A "Past deadline"
     item may well be done already; check Moodle directly if you're not sure.
-    To mark something done yourself, run
-    <code>python3 moodle_dashboard.py --done &lt;id or title&gt;</code> using the
-    <code>#id</code> shown on each item below.
+    Click the checkbox on anything to move it into "Completed" below &mdash;
+    that's saved in this browser and sticks around next time you open this
+    file or re-run the script.
   </div>
 
   <h2>Upcoming</h2>
-  
-        <div class="item" data-bucket="later">
+  <div id="upcoming-list">
+    
+        <div class="item" data-bucket="later" data-uid="190451@el1.netanya.ac.il">
           <div class="item-bar" style="background:#2563a0"></div>
+          <label class="item-check">
+            <input type="checkbox" class="done-checkbox" data-uid="190451@el1.netanya.ac.il">
+          </label>
           <div class="item-body">
-            <div class="item-title" style="">תרגיל  בית  2</div>
+            <div class="item-title">תרגיל  בית  2</div>
             <div class="item-course">מבוא להסתברות - תרגיל קב&#x27; 2 (תשפו_ק_580_2) - שכטר</div>
           </div>
           <div class="item-meta">
             <span class="badge" style="background:#2563a022;color:#2563a0">Upcoming</span>
             <span class="due-date">Tue, 25 Aug 2026 • 23:59</span>
-            <span class="item-id">#190451@el1.netanya.ac.il</span>
           </div>
         </div>
 
-        <div class="item" data-bucket="later">
+        <div class="item" data-bucket="later" data-uid="190435@el1.netanya.ac.il">
           <div class="item-bar" style="background:#2563a0"></div>
+          <label class="item-check">
+            <input type="checkbox" class="done-checkbox" data-uid="190435@el1.netanya.ac.il">
+          </label>
           <div class="item-body">
-            <div class="item-title" style="">תרגיל   בית  2</div>
+            <div class="item-title">תרגיל   בית  2</div>
             <div class="item-course">מבוא לרשתות מחשבים - תרגיל קב&#x27; 2 (תשפו_ק_611_1) - שכטר</div>
           </div>
           <div class="item-meta">
             <span class="badge" style="background:#2563a022;color:#2563a0">Upcoming</span>
             <span class="due-date">Mon, 31 Aug 2026 • 23:59</span>
-            <span class="item-id">#190435@el1.netanya.ac.il</span>
           </div>
         </div>
+    <p class="empty" id="upcoming-empty" hidden>Nothing upcoming right now.</p>
+  </div>
 
-  <details>
-    <summary>Past deadlines (1) &mdash; already passed, submission status unknown</summary>
-    
-        <div class="item" data-bucket="overdue">
+  <details id="past-section">
+    <summary>Past deadlines (<span id="past-count">1</span>) &mdash; already passed, submission status unknown</summary>
+    <div id="past-list">
+      
+        <div class="item" data-bucket="overdue" data-uid="189995@el1.netanya.ac.il">
           <div class="item-bar" style="background:#6b7280"></div>
+          <label class="item-check">
+            <input type="checkbox" class="done-checkbox" data-uid="189995@el1.netanya.ac.il">
+          </label>
           <div class="item-body">
-            <div class="item-title" style="">תרגיל  בית  1</div>
+            <div class="item-title">תרגיל  בית  1</div>
             <div class="item-course">מבוא לרשתות מחשבים - תרגיל קב&#x27; 2 (תשפו_ק_611_1) - שכטר</div>
           </div>
           <div class="item-meta">
             <span class="badge" style="background:#6b728022;color:#6b7280">Past deadline</span>
             <span class="due-date">Thu, 13 Aug 2026 • 23:59</span>
-            <span class="item-id">#189995@el1.netanya.ac.il</span>
           </div>
         </div>
+      <p class="empty" id="past-empty" hidden>None.</p>
+    </div>
   </details>
 
-  <details>
-    <summary>Completed (0)</summary>
-    <p class="empty">Nothing marked done yet.</p>
+  <details id="completed-section">
+    <summary>Completed (<span id="completed-count">0</span>)</summary>
+    <div id="completed-list">
+      <p class="empty" id="completed-empty">Nothing marked done yet.</p>
+    </div>
   </details>
 
   <details>
     <summary>Other course events (5) &mdash; class sessions, attendance, etc.</summary>
     
-        <div class="item" data-bucket="overdue">
+        <div class="item">
           <div class="item-bar" style="background:#6b7280"></div>
           <div class="item-body">
-            <div class="item-title" style="">נוכחות תלמידים</div>
+            <div class="item-title">נוכחות תלמידים</div>
             <div class="item-course">מבוא לרשתות מחשבים - תרגיל קב&#x27; 2 (תשפו_ק_611_1) - שכטר</div>
           </div>
           <div class="item-meta">
             <span class="badge" style="background:#6b728022;color:#6b7280">Past deadline</span>
             <span class="due-date">Thu, 13 Aug 2026 • 13:30</span>
-            <span class="item-id">#190386@el1.netanya.ac.il</span>
           </div>
         </div>
 
-        <div class="item" data-bucket="overdue">
+        <div class="item">
           <div class="item-bar" style="background:#6b7280"></div>
           <div class="item-body">
-            <div class="item-title" style="">שיעור  נצילות  2</div>
+            <div class="item-title">שיעור  נצילות  2</div>
             <div class="item-course">מבוא לרשתות מחשבים - תרגיל קב&#x27; 2 (תשפו_ק_611_1) - שכטר</div>
           </div>
           <div class="item-meta">
             <span class="badge" style="background:#6b728022;color:#6b7280">Past deadline</span>
             <span class="due-date">Thu, 13 Aug 2026 • 13:30</span>
-            <span class="item-id">#190434@el1.netanya.ac.il</span>
           </div>
         </div>
 
-        <div class="item" data-bucket="overdue">
+        <div class="item">
           <div class="item-bar" style="background:#6b7280"></div>
           <div class="item-body">
-            <div class="item-title" style="">נוכחות תלמידים</div>
+            <div class="item-title">נוכחות תלמידים</div>
             <div class="item-course">מבוא לרשתות מחשבים (תשפו_ק_216) - שרון</div>
           </div>
           <div class="item-meta">
             <span class="badge" style="background:#6b728022;color:#6b7280">Past deadline</span>
             <span class="due-date">Thu, 13 Aug 2026 • 16:15</span>
-            <span class="item-id">#190387@el1.netanya.ac.il</span>
           </div>
         </div>
 
-        <div class="item" data-bucket="week">
+        <div class="item">
           <div class="item-bar" style="background:#ca8a04"></div>
           <div class="item-body">
-            <div class="item-title" style="">נוכחות תלמידים</div>
+            <div class="item-title">נוכחות תלמידים</div>
             <div class="item-course">מבוא לרשתות מחשבים (תשפו_ק_216) - שרון</div>
           </div>
           <div class="item-meta">
             <span class="badge" style="background:#ca8a0422;color:#ca8a04">Due this week</span>
             <span class="due-date">Thu, 20 Aug 2026 • 19:15</span>
-            <span class="item-id">#190638@el1.netanya.ac.il</span>
           </div>
         </div>
 
-        <div class="item" data-bucket="week">
+        <div class="item">
           <div class="item-bar" style="background:#ca8a04"></div>
           <div class="item-body">
-            <div class="item-title" style="">נוכחות תלמידים</div>
+            <div class="item-title">נוכחות תלמידים</div>
             <div class="item-course">מבוא לרשתות מחשבים - תרגיל קב&#x27; 2 (תשפו_ק_611_1) - שכטר</div>
           </div>
           <div class="item-meta">
             <span class="badge" style="background:#ca8a0422;color:#ca8a04">Due this week</span>
             <span class="due-date">Thu, 20 Aug 2026 • 19:30</span>
-            <span class="item-id">#190635@el1.netanya.ac.il</span>
           </div>
         </div>
   </details>
 
   <footer>Re-run moodle_dashboard.py to refresh assignment due dates from Moodle.</footer>
 </div>
+<script>
+(function() {
+  var STORAGE_KEY = 'moodle-dashboard-done-v1';
+
+  function loadDone() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) {
+      return {}; // storage unavailable (e.g. sandboxed viewer) — fall back to in-memory only
+    }
+  }
+
+  function saveDone(doneMap) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(doneMap));
+    } catch (e) {
+      // ignore — this session's checkbox clicks just won't persist across reloads
+    }
+  }
+
+  var doneMap = loadDone();
+  var completedList = document.getElementById('completed-list');
+
+  function adjustStat(bucket, delta) {
+    if (!bucket) return;
+    var el = document.querySelector('.n[data-stat="' + bucket + '"]');
+    if (!el) return;
+    var n = parseInt(el.textContent, 10) || 0;
+    el.textContent = Math.max(0, n + delta);
+  }
+
+  function refreshListState(listEl, emptyEl, countEl) {
+    var n = listEl.querySelectorAll('.item').length;
+    if (emptyEl) emptyEl.hidden = n !== 0;
+    if (countEl) countEl.textContent = n;
+  }
+
+  function refreshAll() {
+    refreshListState(document.getElementById('upcoming-list'), document.getElementById('upcoming-empty'), null);
+    refreshListState(document.getElementById('past-list'), document.getElementById('past-empty'), document.getElementById('past-count'));
+    refreshListState(completedList, document.getElementById('completed-empty'), document.getElementById('completed-count'));
+  }
+
+  // Remember where each item started, so unchecking can put it back.
+  document.querySelectorAll('.item[data-uid]').forEach(function(item) {
+    item.__home = {parent: item.parentNode, next: item.nextElementSibling};
+  });
+
+  function moveToCompleted(item) {
+    completedList.appendChild(item);
+  }
+
+  function moveHome(item) {
+    var home = item.__home;
+    if (home && home.parent && home.parent.isConnected) {
+      if (home.next && home.next.isConnected && home.next.parentNode === home.parent) {
+        home.parent.insertBefore(item, home.next);
+      } else {
+        home.parent.appendChild(item);
+      }
+    } else {
+      completedList.appendChild(item); // fallback, shouldn't normally happen
+    }
+  }
+
+  function setDone(item, done) {
+    var uid = item.getAttribute('data-uid');
+    var bucket = item.getAttribute('data-bucket');
+    var checkbox = item.querySelector('.done-checkbox');
+    if (checkbox) checkbox.checked = done;
+    if (done) {
+      moveToCompleted(item);
+      adjustStat(bucket, -1);
+    } else {
+      moveHome(item);
+      adjustStat(bucket, 1);
+    }
+  }
+
+  // Apply saved state on load
+  document.querySelectorAll('.item[data-uid]').forEach(function(item) {
+    var uid = item.getAttribute('data-uid');
+    if (doneMap[uid]) setDone(item, true);
+  });
+  refreshAll();
+
+  // Wire up checkbox clicks
+  document.querySelectorAll('.done-checkbox').forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+      var uid = checkbox.getAttribute('data-uid');
+      var item = checkbox.closest('.item');
+      var done = checkbox.checked;
+      if (done) {
+        doneMap[uid] = true;
+      } else {
+        delete doneMap[uid];
+      }
+      saveDone(doneMap);
+      setDone(item, done);
+      refreshAll();
+    });
+  });
+})();
+</script>
 </body>
 </html>
