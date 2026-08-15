@@ -111,7 +111,17 @@ def load_config():
 
 
 def fetch_ics(url):
-    req = Request(url, headers={"User-Agent": "Mozilla/5.0 (moodle-dashboard script)"})
+    req = Request(
+        url,
+        headers={
+            "User-Agent": (
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+            ),
+            "Accept": "text/calendar,text/plain,*/*",
+            "Accept-Language": "en-US,en;q=0.9,he;q=0.8",
+        },
+    )
     with urlopen(req, timeout=30) as resp:
         raw = resp.read()
     return raw.decode("utf-8", errors="replace")
