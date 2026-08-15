@@ -1,0 +1,10 @@
+# Contains your private Moodle calendar token — never commit this
+config.json
+
+# Generated output — regenerate anytime with `python3 moodle_dashboard.py`
+# (contains your course names/due dates; remove this line if you want it in the repo)
+dashboard.html
+
+# Python
+__pycache__/
+*.pyc
